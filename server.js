@@ -12,14 +12,17 @@ app.use(express.static('public'));
 
 const connectDB = require('./config/db');
 connectDB();
-// Cors 
+// // Cors 
 
-const corsOptions ={
-	// origin: ['http://localhost:3000','http://localhost:5000','http://localhost:3300']
-// 	origin: process.env.ALLOWED_CLIENTS.split(',')
-	origin: ['http://hy-news.in/shareIT']
-}
-app.use(cors(corsOptions));
+// const corsOptions ={
+// 	// origin: ['http://localhost:3000','http://localhost:5000','http://localhost:3300']
+// // 	origin: process.env.ALLOWED_CLIENTS.split(',')
+// 	origin: ['http://hy-news.in/shareIT/']
+// }
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 
 app.use(express.json());
